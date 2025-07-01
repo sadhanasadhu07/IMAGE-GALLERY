@@ -1,0 +1,319 @@
+import React, { useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight, ZoomIn, Filter } from 'lucide-react';
+
+interface ImageData {
+  id: number;
+  src: string;
+  alt: string;
+  category: string;
+  title: string;
+}
+
+const images: ImageData[] = [
+  {
+    id: 1,
+    src: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Mountain landscape',
+    category: 'Nature',
+    title: 'Mountain Vista'
+  },
+  {
+    id: 2,
+    src: 'https://images.pexels.com/photos/572861/pexels-photo-572861.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Tiger portrait',
+    category: 'Animals',
+    title: 'Majestic Tiger'
+  },
+  {
+    id: 3,
+    src: 'https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Modern architecture',
+    category: 'Architecture',
+    title: 'Glass Building'
+  },
+  {
+    id: 4,
+    src: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Forest path',
+    category: 'Nature',
+    title: 'Forest Trail'
+  },
+  {
+    id: 5,
+    src: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Cat portrait',
+    category: 'Animals',
+    title: 'Curious Cat'
+  },
+  {
+    id: 6,
+    src: 'https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'City skyline',
+    category: 'Architecture',
+    title: 'City Lights'
+  },
+  {
+    id: 7,
+    src: 'https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Ocean waves',
+    category: 'Nature',
+    title: 'Ocean Waves'
+  },
+  {
+    id: 8,
+    src: 'https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Horse running',
+    category: 'Animals',
+    title: 'Wild Horse'
+  },
+  {
+    id: 9,
+    src: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Bridge architecture',
+    category: 'Architecture',
+    title: 'Golden Bridge'
+  },
+  {
+    id: 10,
+    src: 'https://images.pexels.com/photos/1562058/pexels-photo-1562058.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Sunset landscape',
+    category: 'Nature',
+    title: 'Golden Hour'
+  },
+  {
+    id: 11,
+    src: 'https://images.pexels.com/photos/1320734/pexels-photo-1320734.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Eagle in flight',
+    category: 'Animals',
+    title: 'Soaring Eagle'
+  },
+  {
+    id: 12,
+    src: 'https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&w=800',
+    alt: 'Modern skyscraper',
+    category: 'Architecture',
+    title: 'Sky High'
+  }
+];
+
+const categories = ['All', 'Nature', 'Animals', 'Architecture'];
+
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [lightboxImage, setLightboxImage] = useState<ImageData | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const filteredImages = selectedCategory === 'All' 
+    ? images 
+    : images.filter(img => img.category === selectedCategory);
+
+  const openLightbox = (image: ImageData) => {
+    setLightboxImage(image);
+    setCurrentImageIndex(filteredImages.findIndex(img => img.id === image.id));
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
+  const goToPrevious = () => {
+    const newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : filteredImages.length - 1;
+    setCurrentImageIndex(newIndex);
+    setLightboxImage(filteredImages[newIndex]);
+  };
+
+  const goToNext = () => {
+    const newIndex = currentImageIndex < filteredImages.length - 1 ? currentImageIndex + 1 : 0;
+    setCurrentImageIndex(newIndex);
+    setLightboxImage(filteredImages[newIndex]);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!lightboxImage) return;
+      
+      switch (event.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          goToPrevious();
+          break;
+        case 'ArrowRight':
+          goToNext();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxImage, currentImageIndex, filteredImages]);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      {/* Header */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20"></div>
+        <div className="relative px-4 py-16 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Explore the Gallery
+            </h1>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Discover stunning photography across nature, animals, and architecture
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Category Filters */}
+      <div className="px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="flex flex-wrap justify-center gap-3">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 ${
+                selectedCategory === category
+                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/25'
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white backdrop-blur-sm'
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <Filter size={16} />
+                {category}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Image Grid */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredImages.map((image, index) => (
+            <div
+              key={image.id}
+              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/10"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                animation: 'fadeInUp 0.6s ease-out forwards'
+              }}
+            >
+              <div className="aspect-square overflow-hidden">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-semibold text-lg mb-1">{image.title}</h3>
+                    <p className="text-gray-300 text-sm">{image.category}</p>
+                  </div>
+                  
+                  {/* Zoom Icon */}
+                  <button
+                    onClick={() => openLightbox(image)}
+                    className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
+                  >
+                    <ZoomIn size={20} />
+                  </button>
+                </div>
+              </div>
+              
+              {/* Click overlay for mobile */}
+              <button
+                onClick={() => openLightbox(image)}
+                className="absolute inset-0 w-full h-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-2xl"
+                aria-label={`View ${image.title} in lightbox`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+          <div className="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors duration-200"
+            >
+              <X size={24} />
+            </button>
+
+            {/* Previous Button */}
+            <button
+              onClick={goToPrevious}
+              className="absolute left-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={goToNext}
+              className="absolute right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
+            >
+              <ChevronRight size={24} />
+            </button>
+
+            {/* Image */}
+            <div className="relative max-w-full max-h-full animate-fade-in">
+              <img
+                src={lightboxImage.src}
+                alt={lightboxImage.alt}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              />
+              
+              {/* Image Info */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+                <h3 className="text-white text-2xl font-bold mb-2">{lightboxImage.title}</h3>
+                <p className="text-gray-300">{lightboxImage.category}</p>
+                <p className="text-gray-400 text-sm mt-1">
+                  {currentImageIndex + 1} of {filteredImages.length}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export default App;
