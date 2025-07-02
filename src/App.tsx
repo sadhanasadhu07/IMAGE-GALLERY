@@ -26,14 +26,14 @@ const images: ImageData[] = [
   },
   {
     id: 3,
-    src: 'https://images.pexels.com/photos/273209/pexels-photo-273209.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Modern architecture',
+    src: 'https://i.pinimg.com/736x/29/bd/ed/29bded437070fa70c6f4b807e6ce5c7f.jpg',
+    alt: 'Chettinad Architecture',
     category: 'Architecture',
-    title: 'Glass Building'
+    title: 'Chettinad house'
   },
   {
     id: 4,
-    src: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=800',
+    src: 'https://i.pinimg.com/736x/56/b9/aa/56b9aab763ba4c42188c1102076625b8.jpg',
     alt: 'Forest path',
     category: 'Nature',
     title: 'Forest Trail'
@@ -54,49 +54,77 @@ const images: ImageData[] = [
   },
   {
     id: 7,
-    src: 'https://images.pexels.com/photos/1366630/pexels-photo-1366630.jpeg?auto=compress&cs=tinysrgb&w=800',
+    src: 'https://i.pinimg.com/736x/bc/49/9c/bc499c92d62bc7b4279211ab0533f6b4.jpg',
     alt: 'Ocean waves',
     category: 'Nature',
     title: 'Ocean Waves'
   },
   {
     id: 8,
-    src: 'https://images.pexels.com/photos/886521/pexels-photo-886521.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Horse running',
+    src: 'https://i.pinimg.com/736x/36/9f/36/369f36b912171b6947602490d31c83b3.jpg',
+    alt: 'PANDA sleeping on the tree',
     category: 'Animals',
-    title: 'Wild Horse'
+    title: 'Cute Panda'
   },
   {
     id: 9,
     src: 'https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Bridge architecture',
+    alt: 'The Colosseum In Rome on a clear blue-sky day',
     category: 'Architecture',
-    title: 'Golden Bridge'
+    title: 'The Colosseum'
   },
   {
     id: 10,
     src: 'https://images.pexels.com/photos/1562058/pexels-photo-1562058.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Sunset landscape',
+    alt: 'NORTHERN LIGHTS',
     category: 'Nature',
-    title: 'Golden Hour'
+    title: 'Aurora lights'
   },
   {
     id: 11,
-    src: 'https://images.pexels.com/photos/1320734/pexels-photo-1320734.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Eagle in flight',
+    src: 'https://i.pinimg.com/736x/6e/c2/96/6ec29655117f9287bda5511f96178af2.jpg',
+    alt: 'Acute little puppy',
     category: 'Animals',
-    title: 'Soaring Eagle'
+    title: 'Dog Paradise'
   },
   {
     id: 12,
-    src: 'https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&w=800',
-    alt: 'Modern skyscraper',
+    src: 'https://i.pinimg.com/736x/50/bb/f3/50bbf3c6655ffc5867e90d7a81ae02c2.jpg',
+    alt: 'HYBE Building',
     category: 'Architecture',
-    title: 'Sky High'
+    title: 'HYBE INSIGHT'
+  },
+  {
+    id: 13,
+    src: 'https://i.pinimg.com/736x/e3/20/1e/e3201ee9c2635e42a79a6b3ec685b883.jpg',
+    alt: 'Cute Little baby',
+    category: 'People',
+    title: 'BABY IN BEE'
+  },
+  {
+    id: 14,
+    src: 'https://i.pinimg.com/736x/86/2d/ec/862dece42eb70ba4c03d902d4750ce8b.jpg',
+    alt: 'Goblin Kdrama picture',
+    category: 'People',
+    title: 'GOBLIN KDRAMA SHOOTING PHOTOGRAPHY'
+  },
+  {
+    id: 15,
+    src: 'https://i.pinimg.com/736x/ee/66/61/ee66615a79a06f59a48c89abfc3139e9.jpg',
+    alt: 'Shadow Pic Of BTS V',
+    category: 'People',
+    title: 'BTS Teahyung'
+  },
+  {
+    id: 16,
+    src: 'https://i.pinimg.com/736x/96/d8/87/96d887c2e3bb0f1f5ed1266d99099e39.jpg',
+    alt: 'RDJ',
+    category: 'People',
+    title: 'IRONMAN - Robert Downey JR'
   }
 ];
 
-const categories = ['All', 'Nature', 'Animals', 'Architecture'];
+const categories = ['All', 'Nature', 'Animals', 'Architecture', 'People'];
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -128,11 +156,9 @@ function App() {
     setLightboxImage(filteredImages[newIndex]);
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!lightboxImage) return;
-      
       switch (event.key) {
         case 'Escape':
           closeLightbox();
@@ -152,12 +178,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Header */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20"></div>
         <div className="relative px-4 py-16 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
               Explore the Gallery
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -166,8 +191,7 @@ function App() {
           </div>
         </div>
       </div>
-
-      {/* Category Filters */}
+<br></br>
       <div className="px-4 sm:px-6 lg:px-8 mb-8">
         <div className="flex flex-wrap justify-center gap-3">
           {categories.map((category) => (
@@ -189,7 +213,6 @@ function App() {
         </div>
       </div>
 
-      {/* Image Grid */}
       <div className="px-4 sm:px-6 lg:px-8 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredImages.map((image, index) => (
@@ -207,15 +230,11 @@ function App() {
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="text-white font-semibold text-lg mb-1">{image.title}</h3>
                     <p className="text-gray-300 text-sm">{image.category}</p>
                   </div>
-                  
-                  {/* Zoom Icon */}
                   <button
                     onClick={() => openLightbox(image)}
                     className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors duration-200"
@@ -224,8 +243,6 @@ function App() {
                   </button>
                 </div>
               </div>
-              
-              {/* Click overlay for mobile */}
               <button
                 onClick={() => openLightbox(image)}
                 className="absolute inset-0 w-full h-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-2xl"
@@ -236,50 +253,38 @@ function App() {
         </div>
       </div>
 
-      {/* Lightbox */}
       {lightboxImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
-          <div className="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
-            {/* Close Button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors duration-200"
-            >
-              <X size={24} />
-            </button>
-
-            {/* Previous Button */}
-            <button
-              onClick={goToPrevious}
-              className="absolute left-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
-            >
-              <ChevronLeft size={24} />
-            </button>
-
-            {/* Next Button */}
-            <button
-              onClick={goToNext}
-              className="absolute right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
-            >
-              <ChevronRight size={24} />
-            </button>
-
-            {/* Image */}
-            <div className="relative max-w-full max-h-full animate-fade-in">
-              <img
-                src={lightboxImage.src}
-                alt={lightboxImage.alt}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-              />
-              
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
-                <h3 className="text-white text-2xl font-bold mb-2">{lightboxImage.title}</h3>
-                <p className="text-gray-300">{lightboxImage.category}</p>
-                <p className="text-gray-400 text-sm mt-1">
-                  {currentImageIndex + 1} of {filteredImages.length}
-                </p>
-              </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black">
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-colors duration-200"
+          >
+            <X size={24} />
+          </button>
+          <button
+            onClick={goToPrevious}
+            className="absolute left-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 z-10 p-3 bg-white/10 backdrop-blur-sm rounded-full text-white hover:bg-white/20 transition-all duration-200 hover:scale-110"
+          >
+            <ChevronRight size={24} />
+          </button>
+          <div className="relative flex items-center justify-center max-w-[90vw] max-h-[90vh] overflow-hidden animate-fade-in">
+            <img
+              src={lightboxImage.src}
+              alt={lightboxImage.alt}
+              className="w-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+              <h3 className="text-white text-2xl font-bold mb-2">{lightboxImage.title}</h3>
+              <p className="text-gray-300">{lightboxImage.category}</p>
+              <p className="text-gray-400 text-sm mt-1">
+                {currentImageIndex + 1} of {filteredImages.length}
+              </p>
             </div>
           </div>
         </div>
