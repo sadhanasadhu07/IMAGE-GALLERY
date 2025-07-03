@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Filter } from 'lucide-react';
+
 
 interface ImageData {
   id: number;
@@ -290,33 +291,38 @@ function App() {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+     <style jsx>{`
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
-      `}</style>
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+  }
+`}</style>
+ 
     </div>
   );
 }
